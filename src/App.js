@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import UserRegister from './components/user-register';
+import AppBarNavigation from './components/layouts/AppBarNavigation';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import Login from './components/login';
+import News from './components/news';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  render(){
+    return (
+      <Router>
+          <div>
+              <AppBarNavigation/>
+              <Route exact path="/register" component={UserRegister} />
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/news" component={News}/>
+              <Redirect from="/" to="register"/>
+          </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
