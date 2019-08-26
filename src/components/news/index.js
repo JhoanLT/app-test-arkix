@@ -71,7 +71,12 @@ class News extends React.Component{
                     type    : 'success',
                 });
                 this.setState({
-                    news    : [...this.state.news, {title, content, _id : response.newsDB._id}],
+                    news    : [...this.state.news, {
+                            title, 
+                            content, 
+                            _id              : response.newsDB._id,
+                            publication_date : response.newsDB.publication_date,
+                        }],
                     title   : '',
                     content : ''
                 });
