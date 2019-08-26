@@ -125,7 +125,7 @@ const ListNews = ({
             )) :
             <div className={classes.noData}><Typography>¡No hay noticias para mostrar!</Typography></div>
         }
-        {total > news.length &&
+        {total > news.length && news.length > 0 &&
           <div>
             <Button
                 className = {classes.viewMore}
