@@ -18,6 +18,5 @@ yarn start
 ```
 
 ## URL App production
-```
+
 https://app-test-arkix.herokuapp.com
-```
