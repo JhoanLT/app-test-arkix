@@ -15,6 +15,7 @@ const UserRegisterContent = ({
     onSubmit,
     response,
     setMessage,
+    loading,
 }) => {
     return(
         <div>
@@ -24,6 +25,7 @@ const UserRegisterContent = ({
                 password       = {password}
                 onChangeFields = {(e) => onChangeFields(e)}
                 onSubmit       = {() => onSubmit()}
+                loading        = {loading}
             />
             {response && response.open &&
                 <CustomSnackbar 
@@ -44,7 +46,8 @@ UserRegisterContent.propTypes = {
     onChangeFields : PropTypes.func,
     onSubmit       : PropTypes.func,
     response       : PropTypes.any,
-    setMessage : PropTypes.func,
+    setMessage     : PropTypes.func,
+    loading        : PropTypes.bool,
 }
 
 export default UserRegisterContent;

@@ -5,7 +5,8 @@ import {
     Paper, 
     TextField, 
     Typography, 
-    Button
+    Button,
+    CircularProgress,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
@@ -30,6 +31,9 @@ const useStyles = makeStyles(theme => ({
         marginTop    : 24,
         borderRadius : 50
     },
+    circularProgress : {
+        marginTop : 18,
+    }
 }));
 
 /**
@@ -41,6 +45,7 @@ const FormNews = ({
     content,
     onChangeFields,
     onSubmit,
+    loading,
 }) => {
     const classes = useStyles();
     return(
@@ -78,15 +83,21 @@ const FormNews = ({
                                 type='file'
                             />
                         </form>
-                        <Button 
-                            variant   = "contained" 
-                            color     = "primary" 
-                            className = {classes.button} 
-                            onClick   = {() => onSubmit()}
-                            fullWidth
-                        >
-                            Publicar
-                        </Button>
+                        <div>
+                            {loading ? 
+                                <CircularProgress className={classes.circularProgress}/> :
+                                <Button 
+                                    variant   = "contained" 
+                                    color     = "primary" 
+                                    className = {classes.button} 
+                                    onClick   = {() => onSubmit()}
+                                    fullWidth
+                                >
+                                    Publicar
+                                </Button>
+                                
+                            }
+                        </div>
                     </div>
                 </Paper>
             </Grid>
@@ -99,6 +110,7 @@ FormNews.propTypes = {
     content        : PropTypes.string,
     onChangeFields : PropTypes.func,
     onSubmit       : PropTypes.func,
+    loading        : PropTypes.bool,
 };
 
 export default FormNews;

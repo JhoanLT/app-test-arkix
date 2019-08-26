@@ -14,6 +14,7 @@ const LoginContent = ({
     onSubmit,
     response,
     setMessage,
+    loading,
 }) => {
     return(
         <div>
@@ -22,6 +23,7 @@ const LoginContent = ({
                 password       = {password}
                 onChangeFields = {(e) => onChangeFields(e)}
                 onSubmit       = {() => onSubmit()}
+                loading        = {loading}
             />
             {response && response.open &&
                 <CustomSnackbar 
@@ -42,6 +44,7 @@ LoginContent.propTypes = {
     onSubmit       : PropTypes.func,
     response       : PropTypes.any,
     setMessage     : PropTypes.func,
+    loading        : PropTypes.bool,
 }
 
 export default LoginContent;

@@ -15,6 +15,7 @@ class UserRegister extends React.Component{
         email    : '',
         password : '',
         response : false,
+        loading  : false,
     };
 
     onChangeFields({target}){
@@ -29,6 +30,7 @@ class UserRegister extends React.Component{
         const endpoint = endpoints.user.register;
 
         if(name !== '' && password !== '' && email !== ''){
+            this.setState({loading : true});
             const response = await this.props.fetchApi(endpoint, {
                 name,
                 email,
@@ -41,9 +43,11 @@ class UserRegister extends React.Component{
                     type    : 'success',
                 });
                 setTimeout(() => {
+                    this.setState({loading : false});
                     this.props.history.push('login');
                 }, 2000)
             } else {
+                this.setState({loading : false});
                 this.setMessaje({
                     open    : true,  
                     message : response.exist ? 'El email ya existe' : 'Ocurrió un error',
@@ -64,7 +68,7 @@ class UserRegister extends React.Component{
     }
     
     render(){
-        const {email, password, name, response} = this.state;
+        const {email, password, name, response, loading} = this.state;
         return(
             <UserRegisterContent
                 name           = {name}
@@ -74,6 +78,7 @@ class UserRegister extends React.Component{
                 onSubmit       = {() => this.onSubmit()}
                 response       = {response}
                 setMessage     = {() => this.setMessaje()}
+                loading        = {loading}
             />
         );
     }

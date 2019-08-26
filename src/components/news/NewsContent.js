@@ -34,6 +34,7 @@ const NewsContent = ({
         searchText,
         viewMore,
         total,
+        loading,
     }) => {
     const classes = useStyles();
     return(
@@ -44,6 +45,7 @@ const NewsContent = ({
                     content        = {content}
                     onChangeFields = {(e) => onChangeFields(e)}
                     onSubmit       = {() => onSubmit()}
+                    loading        = {loading}
                 />
             </div>
             <div className={classes.contentList}>
@@ -84,6 +86,7 @@ NewsContent.propTypes = {
     searchText : PropTypes.string,
     viewMore   : PropTypes.func,
     total      : PropTypes.number,
+    loading    : PropTypes.bool,
 };
 
 export default NewsContent;

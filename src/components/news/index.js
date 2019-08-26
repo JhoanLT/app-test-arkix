@@ -19,6 +19,7 @@ class News extends React.Component{
         response   : false,
         searchText : '',
         total      : 0,
+        loading    : false,
     };
 
     componentDidMount(){
@@ -59,6 +60,7 @@ class News extends React.Component{
         const {title, content} = this.state;
         const endpoint = endpoints.news.register;
         if(title !== '' && content !== ''){
+            this.setState({loading : true});
             const response = await this.props.fetchApi(endpoint, {
                 title,
                 content,
@@ -78,9 +80,11 @@ class News extends React.Component{
                             publication_date : response.newsDB.publication_date,
                         }],
                     title   : '',
-                    content : ''
+                    content : '',
+                    loading : false,
                 });
             } else {
+                this.setState({loading : false});
                 this.setMessaje({
                     open    : true,  
                     message : 'Ocurrió un error al publicar la noticia',
@@ -140,7 +144,14 @@ class News extends React.Component{
     }
 
     render(){
-        const {title, content, response, searchText, total} = this.state;
+        const {
+            title, 
+            content, 
+            response, 
+            searchText, 
+            total, 
+            loading,
+        } = this.state;
         const news = this.newsFilter();
 
         return(
@@ -156,6 +167,7 @@ class News extends React.Component{
                 searchText     = {searchText}
                 viewMore       = {() => this.viewMore()}
                 total          = {total}
+                loading        = {loading}
             />
         )
     }

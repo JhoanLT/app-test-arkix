@@ -13,6 +13,7 @@ class Login extends React.Component{
         email    : '',
         password : '',
         response : false,
+        loading  : false,
     };
 
     componentDidMount(){
@@ -31,15 +32,18 @@ class Login extends React.Component{
         const endpoint = endpoints.user.login;
 
         if(email !== '' && password !== ''){
+            this.setState({loading : true});
             const response = await fetchApi(endpoint, {
                 email,
                 password,
             });
             
             if(response.ok){
+                this.setState({loading : false});
                 setSession(response);
                 history.push('news');
             } else {
+                this.setState({loading : false});
                 this.setMessaje({
                     open    : true,  
                     message : 'Usuario o contraseña incorrectos',
@@ -60,7 +64,7 @@ class Login extends React.Component{
     }
 
     render(){
-        const {email, password, response} = this.state;
+        const {email, password, response, loading} = this.state;
         return(
             <LoginContent
                 email          = {email}
@@ -69,6 +73,7 @@ class Login extends React.Component{
                 onSubmit       = {() => this.onSubmit()}
                 response       = {response}
                 setMessage     = {() => this.setMessaje()}
+                loading        = {loading}
             />
         );
     }
